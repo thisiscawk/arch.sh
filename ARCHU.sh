@@ -11,7 +11,7 @@ mkdir -p /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/vda1 /mnt/boot/efi
 pacstrap -K /mnt base linux linux-firmware base-devel 
-fstabgen -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 cat > archup2.sh <<EOF
 #!/bin/bash
 ln -sf /usr/share/zoneinfo/Europe/Tallinn /etc/localtime

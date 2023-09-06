@@ -49,6 +49,6 @@ EOF
 chmod +x archup2.sh
 cp ~/archup2.sh /mnt/root/
 sync
-arch-chroot /mnt /bin/bash -c "sh ~/archup2.sh"
+arch-chroot /mnt/root sh ~/archup2.sh
 umount -R /mnt
 reboot

@@ -34,7 +34,7 @@ useradd -m anonski
 usermod -aG video,audio,input,power,storage,optical,lp,scanner,dbus,uucp anonski
 echo "Enter Password for new user:"
 passwd anonski
-echo "[lib32]" >> /etc/pacman.conf
+echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Syyu
 pacman -S vim wget curl git btop neofetch openssh dhcpcd 

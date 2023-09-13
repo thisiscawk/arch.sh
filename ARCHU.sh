@@ -2,7 +2,7 @@
 loadkeys sv-latin1
 cfdisk -z /dev/sda #nvme0n1
 mkfs.vfat -F32 /dev/sda1 #nvme0n1p1
-fatlabel /dev/vda1 BOOT
+fatlabel /dev/sda1 BOOT
 mkswap -L SWAP /dev/sda2 #nvme0n1p2
 swapon /dev/sda2
 mkfs.ext4 -L ROOT /dev/sda3 #nvme0n1p3
@@ -41,7 +41,7 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "AddressFamily inet" >> /etc/ssh/sshd_config
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 echo "anonski	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-echo "root	ALL=(ALL) ALL" > /etc/sudoers
+echo "root	ALL=(ALL) ALL" >> /etc/sudoers
 sync
 exit
 EOF

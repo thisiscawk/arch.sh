@@ -1,15 +1,15 @@
 #!/bin/bash
 loadkeys sv-latin1
-cfdisk -z /dev/vda #nvme0n1
-mkfs.vfat -F32 /dev/vda1 #nvme0n1p1
+cfdisk -z /dev/sda #nvme0n1
+mkfs.vfat -F32 /dev/sda1 #nvme0n1p1
 fatlabel /dev/vda1 BOOT
-mkswap -L SWAP /dev/vda2 #nvme0n1p2
-swapon /dev/vda2
-mkfs.ext4 -L ROOT /dev/vda3 #nvme0n1p3
-mount /dev/vda3 /mnt
+mkswap -L SWAP /dev/sda2 #nvme0n1p2
+swapon /dev/sda2
+mkfs.ext4 -L ROOT /dev/sda3 #nvme0n1p3
+mount /dev/sda3 /mnt
 mkdir -p /mnt/boot
 mkdir -p /mnt/boot/efi
-mount /dev/vda1 /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
 pacstrap -K /mnt base linux linux-firmware base-devel 
 genfstab -U /mnt >> /mnt/etc/fstab
 cat > archup2.sh <<EOF
@@ -27,7 +27,6 @@ passwd
 echo "anonski" > /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-pacman -S dhcpcd
 echo "KEYMAP=sv-latin1" >> /etc/vconsole.conf
 mkinitcpio -P
 useradd -m anonski
@@ -49,6 +48,6 @@ EOF
 chmod +x archup2.sh
 cp ~/archup2.sh /mnt/root/
 sync
-arch-chroot /mnt/root sh ~/archup2.sh
+arch-chroot /mnt sh ~/archup2.sh
 umount -R /mnt
 reboot

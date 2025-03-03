@@ -1,5 +1,4 @@
 #!/bin/bash
-loadkeys sv-latin1
 cfdisk -z /dev/sda #nvme0n1
 mkfs.vfat -F32 /dev/sda1 #nvme0n1p1
 fatlabel /dev/sda1 BOOT
